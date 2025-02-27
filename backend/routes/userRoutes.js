@@ -105,11 +105,11 @@ router.get("/getUser/:id", async (req, res) => {
 router.put("/updateUser/:id", async (req, res) => {
   try {
     const { id } = req.params;
-    const { name, email, password, telephone, role } = req.body;
+    const { name, email, telephone, role } = req.body;
 
     const updateUser = await Users.findByIdAndUpdate(
       id,
-      { name, email, password, telephone, role },
+      { name, email, telephone, role },
       { new: true, runValidators: true }
     );
 

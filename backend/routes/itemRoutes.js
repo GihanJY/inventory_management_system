@@ -6,7 +6,7 @@ const router = express.Router();
 // CRUD Operations
 // ==============================
 // Add a new item(Register an item)
-router.post("/addItem", async (req, res) => {
+router.post("/registeritem", async (req, res) => {
   try {
     const { name, quantity, description, category } = req.body;
 
