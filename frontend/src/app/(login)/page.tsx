@@ -1,10 +1,10 @@
 "use client";
+import axios from "axios";
+import toast, { Toaster } from "react-hot-toast";
 import { useTheme } from "next-themes";
 import React, { useState } from "react";
 import { useRouter } from "next/navigation";
 import { MoonStarIcon, Sun, Box } from "lucide-react";
-
-import axios from "axios";
 
 export default function Home() {
   const { theme, setTheme } = useTheme();
@@ -17,7 +17,7 @@ export default function Home() {
   const handleLogin = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (!email || !password) {
-      window.alert("Please fill all the fields before login!");
+      toast.error("Please fill all the fields before login!");
     } else {
       const responce = await axios.post(`${baseUrl}/users/loginUser`, {
         email,
@@ -25,15 +25,17 @@ export default function Home() {
       });
 
       if (responce.status === 200) {
+        toast.success("Login successfully!");
         router.push("/dashboard");
       } else {
-        window.alert("Incorrect login credentials!");
+        toast.error("Incorrect login credentials!");
       }
     }
   };
 
   return (
     <div className="h-screen bg-gray-100 dark:bg-gray-900 text-gray-900 dark:text-gray-100 flex justify-center overflow-hidden">
+      <Toaster position="top-right" reverseOrder={false} />
       <div className="max-w-screen-xl m-0 sm:m-10 bg-white dark:bg-gray-800 shadow sm:rounded-lg flex justify-center flex-1">
         <div className="lg:w-1/2 xl:w-5/12 p-6 sm:p-12">
           <div className="flex flex-row items-center justify-center text-center gap-3">

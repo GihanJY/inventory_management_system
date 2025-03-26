@@ -1,8 +1,9 @@
 "use client";
+import axios from "axios";
+import toast, { Toaster } from "react-hot-toast";
 import React, { useState } from "react";
 import { ArrowLeft } from "lucide-react";
 import { useRouter } from "next/navigation";
-import axios from "axios";
 
 export default function Page() {
   const router = useRouter();
@@ -18,30 +19,32 @@ export default function Page() {
     router.back();
   };
 
-  const handleRegisterUsers = async (e: React.FormEvent<HTMLFormElement>) => {
+  const handleRegisterItem = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-      if (!name || !quantity || !description|| !category) {
-        window.alert("Please fill all the fields before register a new user!");
-      }
-      else {
-        const response = await axios.post(`${baseUrl}/items/registeritem`,{
+    if (!name || !quantity || !description || !category) {
+      toast.error("Please fill all the fields before registering a new item!");
+    } else {
+      try {
+        const response = await axios.post(`${baseUrl}/items/registeritem`, {
           name,
           quantity,
           description,
-          category
+          category,
         });
-
-        if (response.status === 200) {
-          router.push("/dashboard");
-        }
-        else {
-          window.alert("Error occured!");
-        }
+  
+        toast.success("Item added successfully!");
+        // Clear form fields after successful submission
+        location.reload();
+        
+      } catch (error) {
+        toast.error("An error occurred while registering the item.");
       }
-  }
+    }
+  };
 
   return (
     <div className="min-h-screen flex">
+      <Toaster position="top-right" reverseOrder={false} />
       {/* Left Side (Form Section) */}
       <div className="w-1/2 text-white flex flex-col justify-center items-center p-10">
         {/* Back Button & Header */}
@@ -57,7 +60,7 @@ export default function Page() {
 
         {/* Form Container */}
         <div className="w-full max-w-lg bg-white dark:bg-gray-800 shadow-md rounded-lg p-6">
-          <form onSubmit={handleRegisterUsers} className="space-y-5">
+          <form onSubmit={handleRegisterItem} className="space-y-5">
             {/* Name */}
             <div className="flex flex-col">
               <label

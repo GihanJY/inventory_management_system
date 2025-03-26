@@ -2,8 +2,12 @@
 import axios from "axios";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
-import { PackagePlus, LucideSquareEqual, LucideEdit, LucideDelete } from 'lucide-react';
-import { setEngine } from "crypto";
+import {
+  PackagePlus,
+  LucideSquareEqual,
+  LucideEdit,
+  LucideDelete,
+} from "lucide-react";
 
 interface Item {
   _id: string;
@@ -26,7 +30,7 @@ export default function ItemsPage() {
   const [quantity, setQuantity] = useState("");
   const [description, setDescription] = useState("");
   const [category, setCategory] = useState("");
-  
+
   const router = useRouter();
   const baseUrl = process.env.NEXT_PUBLIC_BASE_URL;
 
@@ -56,7 +60,8 @@ export default function ItemsPage() {
   const updateItem = async () => {
     if (!currentItem) return;
     try {
-      const response = await axios.put(`${baseUrl}/items/updateItem/${currentItem._id}`,
+      const response = await axios.put(
+        `${baseUrl}/items/updateItem/${currentItem._id}`,
         {
           name,
           quantity,
@@ -67,16 +72,17 @@ export default function ItemsPage() {
       if (response.status === 200) {
         setIsUpdateModalOpen(false);
       }
-    }
-    catch (error) {
+    } catch (error) {
       console.error("Update item failed!", error);
     }
-  }
+  };
 
   const deleteItem = async () => {
     if (!currentItem) return;
     try {
-      const response = await axios.delete(`${baseUrl}/items/deleteItem/${currentItem._id}`);
+      const response = await axios.delete(
+        `${baseUrl}/items/deleteItem/${currentItem._id}`
+      );
       if (response.status === 200) {
         setIsDeleteModalOpen(false);
       }
@@ -112,7 +118,10 @@ export default function ItemsPage() {
           <tbody>
             {items.length > 0 ? (
               items.map((item) => (
-                <tr key={item._id} className="p-2 border-b last:border-none h-16">
+                <tr
+                  key={item._id}
+                  className="p-2 border-b last:border-none h-16"
+                >
                   <td className="p-2 border">{item._id}</td>
                   <td className="p-2 border">{item.name}</td>
                   <td className="p-2 border">{item.quantity}</td>
@@ -222,22 +231,23 @@ export default function ItemsPage() {
               placeholder="Name"
             />
             <input
+              type="number"
               className="mb-4 w-full px-8 py-4 rounded-lg font-medium bg-gray-100 dark:bg-gray-700 border border-gray-200 dark:border-gray-600 placeholder-gray-500 dark:placeholder-gray-400 text-sm focus:outline-none focus:border-gray-400 dark:focus:border-gray-500 focus:bg-white dark:focus:bg-gray-600"
               value={quantity}
               onChange={(e) => setQuantity(e.target.value)}
-              placeholder="Email"
+              placeholder="Quantity"
             />
             <input
               className="mb-4 w-full px-8 py-4 rounded-lg font-medium bg-gray-100 dark:bg-gray-700 border border-gray-200 dark:border-gray-600 placeholder-gray-500 dark:placeholder-gray-400 text-sm focus:outline-none focus:border-gray-400 dark:focus:border-gray-500 focus:bg-white dark:focus:bg-gray-600"
               value={description}
               onChange={(e) => setDescription(e.target.value)}
-              placeholder="Telephone"
+              placeholder="Description"
             />
             <input
               className="mb-4 w-full px-8 py-4 rounded-lg font-medium bg-gray-100 dark:bg-gray-700 border border-gray-200 dark:border-gray-600 placeholder-gray-500 dark:placeholder-gray-400 text-sm focus:outline-none focus:border-gray-400 dark:focus:border-gray-500 focus:bg-white dark:focus:bg-gray-600"
               value={category}
               onChange={(e) => setCategory(e.target.value)}
-              placeholder="Role"
+              placeholder="Category"
             />
             <div className="flex justify-between mt-10 p-4">
               <button
@@ -283,6 +293,6 @@ export default function ItemsPage() {
           </div>
         </div>
       )}
-      </div>
+    </div>
   );
 }
