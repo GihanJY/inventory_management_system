@@ -118,7 +118,7 @@ export default function Home() {
             <h2 className="text-xl font-semibold text-gray-700 dark:text-gray-300">
               Low Stock
             </h2>
-            <p className="text-4xl font-bold text-blue-600 dark:text-blue-400 mt-2">
+            <p className="text-4xl font-bold text-orange-600 dark:text-blue-400 mt-2">
               {lowStockItems.length}
             </p>
           </div>
@@ -128,7 +128,7 @@ export default function Home() {
             <h2 className="text-xl font-semibold text-gray-700 dark:text-gray-300">
               Out-of-Stock
             </h2>
-            <p className="text-4xl font-bold text-blue-600 dark:text-blue-400 mt-2">
+            <p className="text-4xl font-bold text-red-600 dark:text-blue-400 mt-2">
               {outOfStockItems.length}
             </p>
           </div>
