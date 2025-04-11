@@ -40,30 +40,30 @@ export default function ItemsPage() {
   const baseUrl = process.env.NEXT_PUBLIC_BASE_URL;
 
   useEffect(() => {
+    const fetchItems = async () => {
+      try {
+        setLoading(true);
+        const response = await axios.get(`${baseUrl}/items/getItems`);
+        setItems(response.data.items);
+        setLoading(false);
+      } catch (error) {
+        console.error("Failed to fetch items", error);
+      }
+    };
+  
+    const setDetails = () => {
+      if (currentItem) {
+        setName(currentItem.name);
+        setQuantity(currentItem.quantity);
+        setDescription(currentItem.description);
+        setCategory(currentItem.category);
+      }
+    };
+  
     fetchItems();
     setDetails();
   }, [currentItem]);
-
-  const fetchItems = async () => {
-    try {
-      setLoading(true);
-      const response = await axios.get(`${baseUrl}/items/getItems`);
-      setItems(response.data.items);
-      setLoading(false);
-    } catch (error) {
-      console.error("Failed to fetch items", error);
-    }
-  };
-
-  const setDetails = () => {
-    if (currentItem) {
-      setName(currentItem.name);
-      setQuantity(currentItem.quantity);
-      setDescription(currentItem.description);
-      setCategory(currentItem.category);
-    }
-  };
-
+  
   const filteredItems = items.filter((item) =>
     item.name.toLowerCase().includes(searchQuery.toLowerCase())
   );

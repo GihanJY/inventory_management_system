@@ -47,14 +47,14 @@ export default function Home() {
   useEffect(() => {
     getItemCount();
     getUserCount();
-  }, []);
+  }, [items, users]);
 
   const getUserCount = async () => {
     try {
       const response = await axios.get(`${baseUrl}/users/getUsers`);
       const userData = response.data.users;
       setUsers(userData);
-      setUserCount(userData.length);
+      setUserCount(users.length);
     } catch (error) {
       console.error("Failed to retrieve users count! Error: ", error);
     }

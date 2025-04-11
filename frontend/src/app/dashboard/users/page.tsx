@@ -31,30 +31,31 @@ export default function Home() {
   const baseUrl = process.env.NEXT_PUBLIC_BASE_URL;
 
   useEffect(() => {
+    const fetchUsers = async () => {
+      try {
+        setLoading(true);
+        const response = await axios.get(`${baseUrl}/users/getUsers`);
+        setUsers(response.data.users);
+      } catch (error) {
+        console.error("Fetching users failed!", error);
+      } finally {
+        setLoading(false);
+      }
+    };
+  
+    const setDetails = () => {
+      if (currentUser) {
+        setName(currentUser.name);
+        setEmail(currentUser.email);
+        setTelephone(currentUser.telephone);
+        setRole(currentUser.role);
+      }
+    };
+    
     fetchUsers();
     setDetails();
-  }, [currentUser]);
-
-  const fetchUsers = async () => {
-    try {
-      setLoading(true);
-      const response = await axios.get(`${baseUrl}/users/getUsers`);
-      setUsers(response.data.users);
-    } catch (error) {
-      console.error("Fetching users failed!", error);
-    } finally {
-      setLoading(false);
-    }
-  };
-
-  const setDetails = () => {
-    if (currentUser) {
-      setName(currentUser.name);
-      setEmail(currentUser.email);
-      setTelephone(currentUser.telephone);
-      setRole(currentUser.role);
-    }
-  };
+  }, [currentUser, baseUrl]);
+  
 
   const updateUser = async () => {
     if (!currentUser) return;
