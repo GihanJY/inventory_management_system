@@ -8,10 +8,10 @@ import { useRouter } from "next/navigation";
 export default function Page() {
   const router = useRouter();
 
-  const [name, setName] = useState('');
-  const [quantity, setQuantity] = useState('');
-  const [description, setDescription] = useState('');
-  const [category, setCategory] = useState('');
+  const [name, setName] = useState("");
+  const [quantity, setQuantity] = useState("");
+  const [description, setDescription] = useState("");
+  const [category, setCategory] = useState("");
 
   const baseUrl = process.env.NEXT_PUBLIC_BASE_URL;
 
@@ -31,11 +31,12 @@ export default function Page() {
           description,
           category,
         });
-  
-        toast.success("Item added successfully!");
-        // Clear form fields after successful submission
-        location.reload();
-        
+
+        if (response.status === 200) {
+          toast.success("Item added successfully!");
+          // Clear form fields after successful submission
+          location.reload();
+        }
       } catch (error) {
         toast.error("An error occurred while registering the item.");
       }
@@ -55,7 +56,9 @@ export default function Page() {
           >
             <ArrowLeft className="w-6 h-6" />
           </button>
-          <h1 className="text-black dark:text-white text-2xl font-semibold ml-4">Register an item</h1>
+          <h1 className="text-black dark:text-white text-2xl font-semibold ml-4">
+            Register an item
+          </h1>
         </div>
 
         {/* Form Container */}
