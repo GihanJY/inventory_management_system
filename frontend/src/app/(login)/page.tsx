@@ -41,7 +41,7 @@ export default function Home() {
           <div className="flex flex-row items-center justify-center text-center gap-3">
             <Box size={20} className="" />
             <p className="text-indigo-500 dark:text-indigo-400 font-bold text-2xl">
-              StockManage
+              InvenTrack
             </p>
           </div>
           <div className="mt-12 flex flex-col items-center">

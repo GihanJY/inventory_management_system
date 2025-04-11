@@ -21,6 +21,11 @@ export default function ItemsPage() {
   const [loading, setLoading] = useState(false);
   const [items, setItems] = useState<Item[]>([]);
   const [currentItem, setCurrentItem] = useState<Item | null>(null);
+  const [searchQuery, setSearchQuery] = useState("");
+  const [sortConfig, setSortConfig] = useState<{
+    key: keyof Item;
+    direction: "asc" | "desc";
+  } | null>(null);
 
   const [isDetailsModalOpen, setIsDetailsModalOpen] = useState(false);
   const [isUpdateModalOpen, setIsUpdateModalOpen] = useState(false);
@@ -41,8 +46,10 @@ export default function ItemsPage() {
 
   const fetchItems = async () => {
     try {
+      setLoading(true);
       const response = await axios.get(`${baseUrl}/items/getItems`);
       setItems(response.data.items);
+      setLoading(false);
     } catch (error) {
       console.error("Failed to fetch items", error);
     }
@@ -55,6 +62,39 @@ export default function ItemsPage() {
       setDescription(currentItem.description);
       setCategory(currentItem.category);
     }
+  };
+
+  const filteredItems = items.filter((item) =>
+    item.name.toLowerCase().includes(searchQuery.toLowerCase())
+  );
+
+  const handleSort = (key: keyof Item) => {
+    let direction: "asc" | "desc" = "asc";
+    if (
+      sortConfig &&
+      sortConfig.key === key &&
+      sortConfig.direction === "asc"
+    ) {
+      direction = "desc";
+    }
+    setSortConfig({ key, direction });
+
+    // Create a new sorted array
+    const sortedItems = [...items].sort((a, b) => {
+      const valA = a[key].toString().toLowerCase();
+      const valB = b[key].toString().toLowerCase();
+
+      if (valA < valB) {
+        return direction === "asc" ? -1 : 1;
+      }
+      if (valA > valB) {
+        return direction === "asc" ? 1 : -1;
+      }
+      return 0;
+    });
+
+    // Update the items state with the sorted array
+    setItems(sortedItems);
   };
 
   const updateItem = async () => {
@@ -93,7 +133,7 @@ export default function ItemsPage() {
 
   return (
     <div className="flex flex-col bg-slate-100 dark:bg-slate-950 h-screen p-4">
-      <div className="flex flex-row items-center justify-between ml-4 mr-4 mt-6 mb-20">
+      <div className="flex flex-row items-center justify-between ml-4 mr-4 mt-6 mb-10">
         <h1 className="text-2xl font-bold">Manage Items</h1>
         <button
           type="button"
@@ -103,6 +143,15 @@ export default function ItemsPage() {
           <PackagePlus className="w-4 h-4 mr-2" /> Add item
         </button>
       </div>
+      <div className="flex justify-end w-full">
+        <input
+          type="text"
+          placeholder="Search an item..."
+          className="mb-4 ml-4 w-1/3 px-4 py-2 rounded-lg bg-gray-100 dark:bg-gray-500 border border-gray-300 dark:border-gray-400"
+          value={searchQuery}
+          onChange={(e) => setSearchQuery(e.target.value)}
+        />
+      </div>
       {loading ? (
         <p>Loading items...</p>
       ) : (
@@ -110,14 +159,24 @@ export default function ItemsPage() {
           <thead>
             <tr className="bg-gray-200 dark:bg-gray-700">
               <th className="p-2 border">ID</th>
-              <th className="p-2 border">Name</th>
+              <th
+                className="p-2 border cursor-pointer"
+                onClick={() => handleSort("name")}
+              >
+                Name
+                {sortConfig?.key === "name" && (
+                  <span className="ml-1">
+                    {sortConfig.direction === "asc" ? "↓" : "↑"}
+                  </span>
+                )}
+              </th>
               <th className="p-2 border">Quantity</th>
               <th className="p-2 border">Manage</th>
             </tr>
           </thead>
           <tbody>
-            {items.length > 0 ? (
-              items.map((item) => (
+            {filteredItems.length > 0 ? (
+              filteredItems.map((item) => (
                 <tr
                   key={item._id}
                   className="p-2 border-b last:border-none h-16"
