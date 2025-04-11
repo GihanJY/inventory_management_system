@@ -26,7 +26,7 @@ export default function Home() {
 
       if (responce.status === 200) {
         toast.success("Login successfully!");
-        router.push("/dashboard");
+        router.push("../dashboard");
       } else {
         toast.error("Incorrect login credentials!");
       }
