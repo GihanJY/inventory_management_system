@@ -5,7 +5,7 @@ import { useState, useEffect } from "react";
 import { Switch } from "@headlessui/react";
 
 export default function Settings() {
-  const { theme, setTheme } = useTheme();
+  const { setTheme } = useTheme();
   const [isDarkMode, setIsDarkMode] = useState(false);
   const [enabled, setEnabled] = useState(false);
 
