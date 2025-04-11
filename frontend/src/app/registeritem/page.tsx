@@ -38,7 +38,7 @@ export default function Page() {
           location.reload();
         }
       } catch (error) {
-        toast.error("An error occurred while registering the item.");
+        toast.error(`An error occurred while registering the item: ${error}`);
       }
     }
   };

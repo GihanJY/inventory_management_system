@@ -84,19 +84,19 @@ export default function Home() {
                   )}
                 </button>
                 <p className="text-xs text-gray-600 dark:text-gray-400 text-center">
-                  I agree to abide by templatana's
+                  {`I agree to abide by InvenTrack's `}
                   <a
                     href="#"
                     className="border-b border-gray-500 dark:border-gray-400 border-dotted"
                   >
-                    Terms of Service
+                    {`Terms of Service `}
                   </a>
                   and its
                   <a
                     href="#"
                     className="border-b border-gray-500 dark:border-gray-400 border-dotted"
                   >
-                    Privacy Policy
+                  {` Privacy Policy`}
                   </a>
                 </p>
               </div>
