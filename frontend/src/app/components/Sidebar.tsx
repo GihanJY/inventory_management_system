@@ -8,7 +8,7 @@ import { Home, LogOut, MenuIcon, Box, Settings, User2 } from "lucide-react";
 
 const Sidebar = () => {
   const router = useRouter();
-  const { theme, setTheme } = useTheme();
+  const { theme } = useTheme();
 
   const [mounted, setMounted] = useState(false);
   const [isCollapsed, setIsCollapsed] = useState(false);
