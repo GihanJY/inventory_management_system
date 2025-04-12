@@ -5,11 +5,24 @@ require('dotenv').config();
 
 const app = express();
 const PORT = process.env.PORT || 5000;
+const allowedOrigin = process.env.FRONTEND_URL;
 
 const itemRoutes = require('./routes/itemRoutes');
 const userRoutes = require('./routes/userRoutes');
 
-app.use(cors());
+app.use(cors({
+    origin: function (origin, callback) {
+        if (!origin || origin === allowedOrigin) {
+            callback(null, true);
+        }
+        else {
+            callback(new Error("Not allowed by CORS"));
+        }
+    },
+    credentials: true,
+}));
+
+app.options("*", cors());
 app.use(express.json());
 
 app.use('/items', itemRoutes);
