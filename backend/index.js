@@ -10,7 +10,7 @@ const allowedOrigin = process.env.FRONTEND_URL;
 const itemRoutes = require('./routes/itemRoutes');
 const userRoutes = require('./routes/userRoutes');
 
-app.use(cors({
+app.use('*', cors({
     origin: function (origin, callback) {
         if (!origin || origin === allowedOrigin) {
             callback(null, true);
