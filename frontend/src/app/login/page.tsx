@@ -19,7 +19,7 @@ export default function Home() {
     if (!email || !password) {
       toast.error("Please fill all the fields before login!");
     } else {
-      const responce = await axios.post(`${baseUrl}/users/loginUser`, {
+      const responce = await axios.post(`${baseUrl}/users/loginUser`.replace(/\/{2,}/g, '/'), {
         email,
         password,
       });
