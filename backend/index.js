@@ -9,13 +9,7 @@ const PORT = process.env.PORT || 5000;
 const itemRoutes = require('./routes/itemRoutes');
 const userRoutes = require('./routes/userRoutes');
 
-app.use(cors({
-    origin: [
-      "https://inventory-management-system-liard-eight.vercel.app"
-    ],
-    methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
-    allowedHeaders: ["Content-Type", "Authorization"]
-  }));
+app.use(cors());
 
 app.options("*", cors());
 app.use(express.json());
