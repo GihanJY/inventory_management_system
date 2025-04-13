@@ -35,6 +35,7 @@ export default function Home() {
           toast.error("Incorrect login credentials!");
         }
       } catch (error) {
+        console.error("Login error:", error);
         toast.error("An error occurred during login!");
       } finally {
         setLoading(false);
