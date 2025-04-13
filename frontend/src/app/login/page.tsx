@@ -8,8 +8,8 @@ import { MoonStarIcon, Sun, Box } from "lucide-react";
 
 export default function Home() {
   const { theme, setTheme } = useTheme();
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  const [email, setEmail] = useState("gihan@gmail.com");
+  const [password, setPassword] = useState("gihan123");
 
   const router = useRouter();
   const baseUrl = process.env.NEXT_PUBLIC_BASE_URL;
