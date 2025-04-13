@@ -15,8 +15,8 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "StockManage",
-  description: "Manage your inventory easily.",
+  title: "InvenTrack",
+  description: "A comprehensive inventory tracking system to manage and monitor stock efficiently.",
 };
 
 export default function DashboardLayout({

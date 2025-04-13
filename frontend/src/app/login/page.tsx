@@ -59,12 +59,14 @@ export default function Home() {
                   className="w-full px-8 py-4 rounded-lg font-medium bg-gray-100 dark:bg-gray-700 border border-gray-200 dark:border-gray-600 placeholder-gray-500 dark:placeholder-gray-400 text-sm focus:outline-none focus:border-gray-400 dark:focus:border-gray-500 focus:bg-white dark:focus:bg-gray-600"
                   type="email"
                   placeholder="Email"
+                  value={"gihan@gmail.com"}
                   onChange={(e) => setEmail(e.target.value)}
                 />
                 <input
                   className="w-full px-8 py-4 rounded-lg font-medium bg-gray-100 dark:bg-gray-700 border border-gray-200 dark:border-gray-600 placeholder-gray-500 dark:placeholder-gray-400 text-sm focus:outline-none focus:border-gray-400 dark:focus:border-gray-500 focus:bg-white dark:focus:bg-gray-600 mt-5"
                   type="password"
                   placeholder="Password"
+                  value={"gihan123"}
                   onChange={(e) => setPassword(e.target.value)}
                 />
                 <button
