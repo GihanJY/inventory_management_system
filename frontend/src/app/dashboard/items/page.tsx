@@ -50,7 +50,7 @@ export default function ItemsPage() {
         console.error("Failed to fetch items", error);
       }
     };
-  
+
     const setDetails = () => {
       if (currentItem) {
         setName(currentItem.name);
@@ -59,11 +59,11 @@ export default function ItemsPage() {
         setCategory(currentItem.category);
       }
     };
-  
+
     fetchItems();
     setDetails();
   }, [currentItem]);
-  
+
   const filteredItems = items.filter((item) =>
     item.name.toLowerCase().includes(searchQuery.toLowerCase())
   );
@@ -153,7 +153,26 @@ export default function ItemsPage() {
         />
       </div>
       {loading ? (
-        <p>Loading items...</p>
+        <svg
+          className="animate-spin h-5 w-5 text-white"
+          xmlns="http://www.w3.org/2000/svg"
+          fill="none"
+          viewBox="0 0 24 24"
+        >
+          <circle
+            className="opacity-25"
+            cx="12"
+            cy="12"
+            r="10"
+            stroke="currentColor"
+            strokeWidth="4"
+          ></circle>
+          <path
+            className="opacity-75"
+            fill="currentColor"
+            d="M4 12a8 8 0 018-8v4a4 4 0 00-4 4H4z"
+          ></path>
+        </svg>
       ) : (
         <table className="bg-white dark:bg-gray-800 shadow-md rounded-lg p-4 w-full border-collapse">
           <thead>

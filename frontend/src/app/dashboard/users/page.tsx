@@ -2,7 +2,12 @@
 import axios from "axios";
 import { useRouter } from "next/navigation";
 import { useState, useEffect } from "react";
-import { UserPlus2, LucideSquareEqual, LucideEdit, LucideDelete } from "lucide-react";
+import {
+  UserPlus2,
+  LucideSquareEqual,
+  LucideEdit,
+  LucideDelete,
+} from "lucide-react";
 
 interface User {
   _id: string;
@@ -42,7 +47,7 @@ export default function Home() {
         setLoading(false);
       }
     };
-  
+
     const setDetails = () => {
       if (currentUser) {
         setName(currentUser.name);
@@ -51,11 +56,10 @@ export default function Home() {
         setRole(currentUser.role);
       }
     };
-    
+
     fetchUsers();
     setDetails();
   }, [currentUser, baseUrl]);
-  
 
   const updateUser = async () => {
     if (!currentUser) return;
@@ -105,7 +109,26 @@ export default function Home() {
       </div>
 
       {loading ? (
-        <p>Loading users...</p>
+        <svg
+          className="animate-spin h-5 w-5 text-white"
+          xmlns="http://www.w3.org/2000/svg"
+          fill="none"
+          viewBox="0 0 24 24"
+        >
+          <circle
+            className="opacity-25"
+            cx="12"
+            cy="12"
+            r="10"
+            stroke="currentColor"
+            strokeWidth="4"
+          ></circle>
+          <path
+            className="opacity-75"
+            fill="currentColor"
+            d="M4 12a8 8 0 018-8v4a4 4 0 00-4 4H4z"
+          ></path>
+        </svg>
       ) : (
         <table className="bg-white dark:bg-gray-800 shadow-md rounded-lg p-4 w-full border-collapse">
           <thead>
@@ -119,7 +142,10 @@ export default function Home() {
           <tbody>
             {users.length > 0 ? (
               users.map((user) => (
-                <tr key={user._id} className="p-2 border-b last:border-none h-16">
+                <tr
+                  key={user._id}
+                  className="p-2 border-b last:border-none h-16"
+                >
                   <td className="p-2 border">{user._id}</td>
                   <td className="p-2 border">{user.name}</td>
                   <td className="p-2 border">{user.role}</td>
