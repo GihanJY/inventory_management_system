@@ -10,6 +10,7 @@ export default function Home() {
   const { theme, setTheme } = useTheme();
   const [email, setEmail] = useState("gihan@gmail.com");
   const [password, setPassword] = useState("gihan123");
+  const [loading, setLoading] = useState(false);
 
   const router = useRouter();
   const baseUrl = process.env.NEXT_PUBLIC_BASE_URL;
@@ -19,18 +20,24 @@ export default function Home() {
     if (!email || !password) {
       toast.error("Please fill all the fields before login!");
     } else {
-      const responce = await axios.post(`${baseUrl}/users/loginUser`, {
-        email,
-        password,
-      });
+      setLoading(true);
+      try {
+        const response = await axios.post(`${baseUrl}/users/loginUser`, {
+          email,
+          password,
+        });
 
-      if (responce.status === 200) {
-        toast.success("Login successfully!");
-        console.log("Redirecting to dashboard...");
-        router.push("/dashboard");
-      }
-      else {
-        toast.error("Incorrect login credentials!");
+        if (response.status === 200) {
+          toast.success("Login successfully!");
+          console.log("Redirecting to dashboard...");
+          router.push("/dashboard");
+        } else {
+          toast.error("Incorrect login credentials!");
+        }
+      } catch (error) {
+        toast.error("An error occurred during login!");
+      } finally {
+        setLoading(false);
       }
     }
   };
@@ -59,21 +66,45 @@ export default function Home() {
                   className="w-full px-8 py-4 rounded-lg font-medium bg-gray-100 dark:bg-gray-700 border border-gray-200 dark:border-gray-600 placeholder-gray-500 dark:placeholder-gray-400 text-sm focus:outline-none focus:border-gray-400 dark:focus:border-gray-500 focus:bg-white dark:focus:bg-gray-600"
                   type="email"
                   placeholder="Email"
-                  value={"gihan@gmail.com"}
+                  value={email}
                   onChange={(e) => setEmail(e.target.value)}
                 />
                 <input
                   className="w-full px-8 py-4 rounded-lg font-medium bg-gray-100 dark:bg-gray-700 border border-gray-200 dark:border-gray-600 placeholder-gray-500 dark:placeholder-gray-400 text-sm focus:outline-none focus:border-gray-400 dark:focus:border-gray-500 focus:bg-white dark:focus:bg-gray-600 mt-5"
                   type="password"
                   placeholder="Password"
-                  value={"gihan123"}
+                  value={password}
                   onChange={(e) => setPassword(e.target.value)}
                 />
                 <button
                   type="submit"
                   className="mt-5 tracking-wide font-semibold bg-indigo-500 dark:bg-indigo-600 text-gray-100 w-full py-4 rounded-lg hover:bg-indigo-700 dark:hover:bg-indigo-700 transition-all duration-300 ease-in-out flex items-center justify-center focus:shadow-outline focus:outline-none"
+                  disabled={loading}
                 >
-                  <span className="ml-3">Login</span>
+                  {loading ? (
+                    <svg
+                      className="animate-spin h-5 w-5 text-white"
+                      xmlns="http://www.w3.org/2000/svg"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                    >
+                      <circle
+                        className="opacity-25"
+                        cx="12"
+                        cy="12"
+                        r="10"
+                        stroke="currentColor"
+                        strokeWidth="4"
+                      ></circle>
+                      <path
+                        className="opacity-75"
+                        fill="currentColor"
+                        d="M4 12a8 8 0 018-8v4a4 4 0 00-4 4H4z"
+                      ></path>
+                    </svg>
+                  ) : (
+                    <span className="ml-3">Login</span>
+                  )}
                 </button>
               </form>
               <div className="flex items-center justify-center h-9">
@@ -100,7 +131,7 @@ export default function Home() {
                     href="#"
                     className="border-b border-gray-500 dark:border-gray-400 border-dotted"
                   >
-                  {` Privacy Policy`}
+                    {` Privacy Policy`}
                   </a>
                 </p>
               </div>
