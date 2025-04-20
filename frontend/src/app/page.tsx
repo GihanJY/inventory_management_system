@@ -9,16 +9,23 @@ export default function Home() {
 
   useEffect(() => {
     const startServer = async () => {
+      if (!baseUrl) {
+        console.error("NEXT_PUBLIC_BASE_URL is not defined");
+        return;
+      }
+
       try {
         await axios.get(`${baseUrl}/`);
       } catch (error) {
         console.error("Failed to ping server:", error);
       } finally {
-        router.push("/login");
+        setTimeout(() => {
+          router.push("/login");
+        }, 2000);
       }
     };
     startServer();
-  }, [router]);
+  }, [router, baseUrl]);
 
   return (
     <div className="flex items-center justify-center h-screen bg-blue-100">
