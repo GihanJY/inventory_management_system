@@ -1,20 +1,18 @@
-# Project Title
+# Inventrack - Inventory Management System
 
-A brief description of what this project does and who it's for
+An Inventory Management System is designed to help businesses efficiently manage stock levels, track product movements, and streamline operations.
 
 ## License
 
 [MIT](https://choosealicense.com/licenses/mit/)
 
-![Logo](https://inventory-management-system-liard-eight.vercel.app/logo.png)
-
 ## Tech Stack
 
-**Client:** React, TailwindCSS
-
-**Server:** Node, Express
-
-**Deployment:** Render, Vercel
+- **Frontend**: Next.js Axios
+- **Backend**: Node.js, Express.js
+- **Database**: MongoDB
+- **Authentication**: JWT
+- **Hosting**: Vercel, Render
 
 ## Visit
 
