@@ -4,7 +4,7 @@ An Inventory Management System is designed to help businesses efficiently manage
 
 ## License
 
-[MIT](https://choosealicense.com/licenses/mit/)
+[MIT]([https://choosealicense.com/licenses/mit/](https://github.com/GihanJY/inventory_management_system/blob/main/LICENSE))
 
 ## Tech Stack
 
