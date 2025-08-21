@@ -16,4 +16,4 @@ An Inventory Management System is designed to help businesses efficiently manage
 
 ## Visit
 
-https://inventory-management-system-liard-eight.vercel.app
+[Inventrack](https://inventory-management-system-liard-eight.vercel.app/)
