@@ -1,1 +1,114 @@
+# ============================================================================
+# ENVIRONMENT VARIABLES
+# ============================================================================
+# Ignore .env files in both backend and frontend directories
+# These contain sensitive information like API keys and database credentials
 backend/.env
+backend/.env.local
+backend/.env.*.local
+
+frontend/.env
+frontend/.env.local
+frontend/.env.*.local
+
+# Root-level environment files
+.env
+.env.local
+.env.*.local
+
+# ============================================================================
+# DEPENDENCIES
+# ============================================================================
+# Node.js and npm dependencies at any level in the project
+node_modules/
+backend/node_modules/
+frontend/node_modules/
+
+# pnpm (package manager)
+/.pnp
+.pnp.*
+
+# Yarn workspaces
+.yarn/*
+!.yarn/patches
+!.yarn/plugins
+!.yarn/releases
+!.yarn/versions
+
+# ============================================================================
+# BACKEND-SPECIFIC IGNORES
+# ============================================================================
+# Backend build and output directories
+backend/dist/
+backend/build/
+backend/out/
+
+# Backend logs and debug files
+backend/npm-debug.log*
+backend/yarn-debug.log*
+backend/yarn-error.log*
+backend/.pnpm-debug.log*
+
+# ============================================================================
+# FRONTEND-SPECIFIC IGNORES (Next.js & React)
+# ============================================================================
+# Next.js build and cache directories
+frontend/.next/
+frontend/out/
+frontend/build/
+
+# Frontend production build
+frontend/.vercel/
+
+# Frontend testing coverage
+frontend/coverage/
+
+# Frontend logs and debug files
+frontend/npm-debug.log*
+frontend/yarn-debug.log*
+frontend/yarn-error.log*
+frontend/.pnpm-debug.log*
+
+# Frontend TypeScript build info
+frontend/*.tsbuildinfo
+frontend/next-env.d.ts
+
+# ============================================================================
+# SHARED IGNORES (OS, Editor, Development Tools)
+# ============================================================================
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+*.local
+
+# Windows
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+
+# IDE and editor files
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.project
+.classpath
+.c9/
+*.launch
+.settings/
+*.sublime-workspace
+
+# Miscellaneous
+*.pem
+*.key
+.cache/
+
+# ============================================================================
+# ROOT-LEVEL BUILD & CACHE DIRECTORIES
+# ============================================================================
+/coverage
+/dist
+/build
+/out
